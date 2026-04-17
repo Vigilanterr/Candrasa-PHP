@@ -1,6 +1,12 @@
 <?php
+// Cek apakah variabel koneksi $conn ada, jika tidak panggil config
+if (!isset($conn)) {
+    require_once '../config.php';
+}
+
 // Ambil data produk dari database MySQL
-$query_products = mysqli_query($conn, "SELECT * FROM products LIMIT 8");
+// Kita urutkan berdasarkan yang terbaru agar produk yang baru diinput di kelola.php muncul di atas
+$query_products = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC LIMIT 8");
 ?>
 
 <div class="product flex flex-col bg-[#F8F9FA] px-4 md:px-13 py-7 gap-6">
@@ -19,15 +25,15 @@ $query_products = mysqli_query($conn, "SELECT * FROM products LIMIT 8");
                         <img src="assets/images/<?= $product['gambar'] ?>" 
                              alt="<?= $product['nama_produk'] ?>" 
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                             onerror="this.src='https://via.placeholder.com/300x200?text=Bread'">
+                             onerror="this.src='https://via.placeholder.com/300x200?text=Candrasa+Bakery'">
                         
-                        <?php if ($product['rating'] >= 4.5) : ?>
+                        <?php if ($product['is_popular'] == 1 || $product['rating'] >= 4.5) : ?>
                             <div class="absolute left-3 top-1.5 w-5 max-[580px]:w-4 max-[420px]:w-3 max-[420px]:left-2">
-                                <span>🔥</span>
+                                <span class="text-lg drop-shadow-md">🔥</span>
                             </div>
                         <?php endif; ?>
 
-                        <p class="absolute font-inter rounded-2xl flex items-center justify-center right-2 bottom-2 text-white text-xs px-2 py-0.5 max-[580px]:text-[9px] max-[420px]:text-[8px] max-[420px]:bottom-1.5 
+                        <p class="absolute font-inter rounded-2xl flex items-center justify-center right-2 bottom-2 text-white text-[10px] md:text-xs px-2 py-0.5 max-[580px]:text-[9px] max-[420px]:text-[8px] max-[420px]:bottom-1.5 
                             <?= ($product['status_stok'] == 'Ready') ? 'bg-green-600' : 'bg-red-700' ?>">
                             <?= $product['status_stok'] ?>
                         </p>
@@ -36,10 +42,10 @@ $query_products = mysqli_query($conn, "SELECT * FROM products LIMIT 8");
                     <div class="description flex justify-between items-center gap-2">
                         <div class="left min-w-0">
                             <p class="font-poppins font-semibold tracking-wider text-[15px] md:text-[18px] truncate max-[580px]:text-[13px] max-[420px]:text-[11px] text-[#030075]">
-                                <?= $product['nama_produk'] ?>
+                                <?= htmlspecialchars($product['nama_produk']) ?>
                             </p>
                             
-                            <p class="font-inter text-xs font-bold bg-[#FFCC00] w-20 text-center rounded-full py-0.5 max-[580px]:text-[11px] max-[420px]:text-[10px] max-[420px]:w-18">
+                            <p class="font-inter text-[10px] md:text-xs font-bold bg-[#FFCC00] w-fit px-3 text-center rounded-full py-0.5 max-[580px]:text-[9px] max-[420px]:text-[8px]">
                                 Rp <?= number_format($product['harga'], 0, ',', '.') ?>
                             </p>
                             
@@ -52,25 +58,29 @@ $query_products = mysqli_query($conn, "SELECT * FROM products LIMIT 8");
                                 </p>
                             </div>
 
-                            <p class="text-[11px] md:text-[12px] line-clamp-2 max-[580px]:text-[8px] max-[420px]:text-[7px] max-[380px]:text-[6px] text-gray-500">
-                                <?= $product['deskripsi'] ?>
+                            <p class="text-[11px] md:text-[12px] line-clamp-2 max-[580px]:text-[8px] max-[420px]:text-[7px] max-[380px]:text-[6px] text-gray-500 leading-tight">
+                                <?= htmlspecialchars($product['deskripsi']) ?>
                             </p>
                         </div>
 
-                        <div class="shrink-0 overflow-hidden bg-[#5543FF] rounded-[10px] p-2.5 md:p-3.5 group transition-all ease-in-out duration-200 hover:bg-[#FFCC00] cursor-pointer">
+                        <div class="shrink-0 overflow-hidden bg-[#5543FF] rounded-[10px] p-2.5 md:p-3.5 group transition-all ease-in-out duration-200 hover:bg-[#FFCC00] cursor-pointer shadow-sm active:scale-90">
                             <img src="assets/images/IconBelanja.png" 
                                  alt="Iconbelanja" 
-                                 class="w-7 md:w-10 max-[420px]:w-5 filter brightness-0 invert group-hover:invert-0">
+                                 class="w-6 md:w-8 max-[420px]:w-5 filter brightness-0 invert group-hover:invert-0 transition-all">
                         </div>
                     </div>
                 </div>
             <?php endwhile; ?>
+        <?php else : ?>
+            <div class="col-span-full py-20 text-center">
+                <p class="text-gray-400 font-medium">Belum ada produk yang tersedia.</p>
+            </div>
         <?php endif; ?>
     </div>
 
-    <div class="flex justify-center mt-4">
-        <div class="flex bg-[#030075] px-5 py-2 rounded-2xl w-44 justify-center items-center cursor-pointer group transition-all ease-in-out duration-300 hover:scale-105 shadow-[0_5px_10px_rgba(0,0,0,0.2)]">
-            <p class="font-poppins font-semibold text-white max-[525px]:text-[12px]">Lebih Banyak ‎ 》</p>
-        </div>
+    <div class="flex justify-center mt-6">
+        <a href="katalog.php" class="flex bg-[#030075] px-6 py-2.5 rounded-2xl w-44 justify-center items-center cursor-pointer group transition-all ease-in-out duration-300 hover:scale-105 hover:bg-black shadow-[0_5px_15px_rgba(3,0,117,0.3)] max-[525px]:w-37">
+            <p class="font-poppins font-semibold text-white max-[525px]:text-[12px] tracking-wide">Lebih Banyak ‎ 》</p>
+        </a>
     </div>
 </div>

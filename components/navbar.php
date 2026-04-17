@@ -1,6 +1,9 @@
 <?php
 // Mendapatkan nama file saat ini untuk menentukan link aktif
 $current_page = basename($_SERVER['PHP_SELF']);
+
+// Ambil data nama user dari session jika sudah login
+$nama_display = isset($_SESSION['user_nama']) ? $_SESSION['user_nama'] : (isset($_SESSION['user_email']) ? explode('@', $_SESSION['user_email'])[0] : 'Guest');
 ?>
 
 <div class="bg-[#030075] text-white font-sans sticky top-0 z-30">
@@ -47,25 +50,24 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </ul>
 
         <div class="flex items-center gap-4 sm:gap-5">
-            <div class="hidden lg:flex items-center gap-5">
+            <div class="hidden lg:flex items-center gap-6">
                 <a href="#" class="inline-block opacity-50 hover:opacity-100 transition-opacity duration-200">
                     <img src="assets/images/IconBelanja.png" alt="Belanja" class="w-4">
                 </a>
                 <a href="#" class="inline-block opacity-50 hover:opacity-100 transition-opacity duration-200">
                     <img src="assets/images/IconSettings.png" alt="Settings" class="w-4">
                 </a>
-            </div>
 
-            <div class="hidden lg:flex items-center gap-5">
-                <div class="w-px h-3 bg-white/20"></div>
-                <?php if(isset($_SESSION['user_id'])): ?>
-                    <a href="logout.php" class="text-[11px] font-medium tracking-widest uppercase text-white/60 hover:text-white">Logout</a>
-                <?php else: ?>
-                    <a href="index.php" class="flex items-center gap-2 text-[11px] font-medium tracking-widest uppercase text-white/60 hover:text-white transition-colors duration-200">
-                        Login
-                        <img src="assets/images/IconLogin.png" alt="Login" class="w-6 opacity-60">
-                    </a>
-                <?php endif; ?>
+                <div class="flex items-center gap-3 border-l border-white/20 pl-6 cursor-pointer group">
+                    <div class="flex flex-col items-end">
+                        <span class="text-xs font-bold tracking-tight"><?= htmlspecialchars($nama_display) ?></span>
+                        <span class="text-[10px] text-white/50 uppercase tracking-tighter">Pengguna</span>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-gray-400 overflow-hidden border-2 border-white/20 group-hover:border-white/50 transition-all">
+                        <img src="https://ui-avatars.com/api/?name=<?= urlencode($nama_display) ?>&background=random&color=fff" alt="Profile" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
             </div>
 
             <div class="flex items-center gap-4 lg:hidden">
@@ -98,44 +100,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </form>
     </div>
 
-<nav class="bg-[#030075] text-white font-sans sticky top-0 z-30">
-    <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5">
-        <div class="shrink-0">
-            <img src="assets/images/logo-web-full.png" alt="logocandrasa" class="w-24 sm:w-28 lg:w-32">
-        </div>
-
-        <div class="hidden lg:block">
-            <form class="relative w-full md:w-64 lg:w-80">
-                <input type="text" placeholder="Search products..." class="w-full rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 pl-10 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" /></svg>
-            </form>
-        </div>
-
-        <ul class="hidden lg:flex items-center gap-7">
-            <li><a href="home.php" class="text-[11px] font-medium tracking-widest uppercase text-white hover:scale-105 transition-all">Beranda</a></li>
-            <li><a href="#" class="text-[11px] font-medium tracking-widest uppercase text-white/60 hover:text-white transition-all">Lokasi</a></li>
-            <li><a href="#" class="text-[11px] font-medium tracking-widest uppercase text-white/60 hover:text-white transition-all">News & Promo</a></li>
-            <span class="bg-white/20 w-px h-3"></span>
-            <li><a href="#" class="text-[11px] font-medium tracking-widest uppercase text-white/60 hover:text-white transition-all">FAQ</a></li>
-            <li><a href="#" class="text-[11px] font-medium tracking-widest uppercase text-white/60 hover:text-white transition-all">About</a></li>
+    <nav class="flex-1 overflow-y-auto px-6 py-6">
+        <ul class="flex flex-col gap-5 text-white">
+            <li><a href="home.php" class="text-[11px] font-medium tracking-widest uppercase">Beranda</a></li>
+            <li><a href="#" class="text-[11px] font-medium tracking-widest uppercase text-white/60">Lokasi</a></li>
+            <li><a href="#" class="text-[11px] font-medium tracking-widest uppercase text-white/60">News & Promo</a></li>
+            <div class="h-px bg-white/10 my-1"></div>
+            <li><a href="#" class="text-[11px] font-medium tracking-widest uppercase text-white/60">FAQ</a></li>
+            <li><a href="#" class="text-[11px] font-medium tracking-widest uppercase text-white/60">About</a></li>
         </ul>
-
-        <div class="flex items-center gap-4 sm:gap-5">
-            <div class="hidden lg:flex items-center gap-5">
-                <img src="assets/images/IconBelanja.png" alt="Belanja" class="w-4 opacity-50 hover:opacity-100 cursor-pointer">
-                <img src="assets/images/IconSettings.png" alt="Settings" class="w-4 opacity-50 hover:opacity-100 cursor-pointer">
-            </div>
-            <div class="hidden lg:flex items-center gap-5 border-l border-white/20 pl-5">
-                <a href="logout.php" class="flex items-center gap-2 text-[11px] font-medium tracking-widest uppercase text-white/60 hover:text-white">
-                    Logout <img src="assets/images/IconLogin.png" alt="Logout" class="w-6 opacity-60">
-                </a>
-            </div>
-            <button onclick="toggleMobileMenu(true)" class="lg:hidden opacity-50 hover:opacity-100">
-                <img src="assets/images/HamburgerIcon.png" alt="Menu" class="w-5">
-            </button>
-        </div>
-    </div>
-</nav>
+    </nav>
 
     <div class="px-6 py-5 border-t border-white/10">
         <div class="flex items-center justify-between">
