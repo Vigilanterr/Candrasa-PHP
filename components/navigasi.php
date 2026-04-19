@@ -3,11 +3,19 @@ $active_category = isset($_GET['category']) ? $_GET['category'] : 'Roti Manis';
 
 // Data kategori sesuai file images kamu
 $categories = [
+<<<<<<< HEAD
     ['nama' => 'Roti Manis', 'img' => 'assets/images/RotimANIS.png'], 
     ['nama' => 'Roti Gurih', 'img' => 'assets/images/RotiGurih.png'],
     ['nama' => 'Biskuit & Snack', 'img' => 'assets/images/Bikuit.png'],
     ['nama' => 'Dessert', 'img' => 'assets/images/Desert.png'],
     ['nama' => 'Paket', 'img' => 'assets/images/Paket.png'], 
+=======
+    ['nama' => 'Roti Manis', 'img' => 'assets/images/RotimANIS.PNG'], 
+    ['nama' => 'Roti Gurih', 'img' => 'assets/images/ROTIgurih.png'],
+    ['nama' => 'Biskuit & Snack', 'img' => 'assets/images/bikuit.png'],
+    ['nama' => 'Dessert', 'img' => 'assets/images/desert.png'],
+    ['nama' => 'Paket', 'img' => 'assets/images/Paket.png'], // Tambahan sesuai foto
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
 ];
 ?>
 

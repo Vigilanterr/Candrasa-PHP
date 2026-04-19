@@ -1,5 +1,6 @@
 <?php
 session_start();
+<<<<<<< HEAD
 require_once 'config.php';
 
 // --- TAMBAHKAN KODE INI ---
@@ -11,6 +12,11 @@ if (isset($_SESSION['user_id'])) {
 // --------------------------
 
 $error_message = ""; 
+=======
+require_once 'config.php'; // Pastikan file config.php yang sebelumnya sudah ada
+
+$error_message = ""; // Variabel untuk menampung pesan error
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
 
 // Proses Login
 if (isset($_POST['login'])) {
@@ -24,10 +30,18 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
         
+<<<<<<< HEAD
         // Cek password
         if ($password === $row['password']) {
             
             // Set Session
+=======
+        // Cek password (catatan: jika kamu menggunakan hash di database, gunakan password_verify)
+        // Untuk sekarang kita asumsikan password plain-text atau belum di-hash
+        if ($password === $row['password']) {
+            
+// Set Session
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_email'] = $row['email'];
             $_SESSION['user_role'] = $row['role'];
@@ -167,6 +181,7 @@ if (isset($_POST['login'])) {
         </div>
     </div>
 
+<<<<<<< HEAD
 <div class="hidden lg:flex lg:w-1/2 bg-[#5543FF] relative items-center justify-center overflow-hidden">
     <div class="relative z-20 w-full px-4 flex flex-col items-center">
         <img 
@@ -176,6 +191,20 @@ if (isset($_POST['login'])) {
         />
     </div>
 </div>
+=======
+    <div class="hidden lg:flex lg:w-1/2 bg-[#5543FF] relative items-center justify-center overflow-hidden">
+        <div class="absolute top-8 right-12 text-white opacity-20 text-2xl font-bold tracking-[8px]">......<br />......</div>
+        <div class="absolute bottom-16 left-12 text-white opacity-20 text-2xl font-bold tracking-[8px]">......<br />......</div>
+        
+        <div class="relative z-10 w-full px-12 flex flex-col items-center">
+            <img 
+                src="assets/images/Revisi Login pict.svg" 
+                alt="Bakery Illustration" 
+                class="max-w-[125%] h-auto drop-shadow-2xl" 
+            />
+        </div>
+    </div>
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
 <script>
     feather.replace();
 </script>

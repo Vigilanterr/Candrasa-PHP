@@ -3,7 +3,11 @@
 
         <div class="flex flex-col gap-6 max-w-xs">
             <div class="flex items-center gap-3">
+<<<<<<< HEAD
                 <img src="assets/images/CandrasaPutih.svg" alt="Candrasa Logo" class="w-80 object-contain" onerror="this.src='https://via.placeholder.com/200x60?text=CANDRASA'">
+=======
+                <img src="assets/images/candrasa putih.svg" alt="Candrasa Logo" class="w-80 object-contain" onerror="this.src='https://via.placeholder.com/200x60?text=CANDRASA'">
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
             </div>
 
             <div class="flex flex-col gap-3">

@@ -142,6 +142,7 @@ if (isset($_POST['register'])) {
         </div>
     </div>
 
+<<<<<<< HEAD
 <div class="hidden lg:flex lg:w-1/2 bg-[#5543FF] relative items-center justify-center overflow-hidden">
     <div class="relative z-20 w-full px-4 flex flex-col items-center">
         <img 
@@ -151,6 +152,13 @@ if (isset($_POST['register'])) {
         />
     </div>
 </div>
+=======
+    <div class="hidden lg:flex lg:w-1/2 bg-[#5543FF] relative items-center justify-center overflow-hidden">
+        <div class="relative z-10 w-full px-12 flex flex-col items-center">
+            <img src="assets/images/Revisi Login pict.svg" alt="Bakery Illustration" class="max-w-[125%] h-auto drop-shadow-2xl" />
+        </div>
+    </div>
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
 
     <script>feather.replace();</script>
 </body>

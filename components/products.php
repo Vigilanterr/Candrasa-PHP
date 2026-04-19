@@ -1,9 +1,17 @@
 <?php
 // Cek apakah variabel koneksi $conn ada, jika tidak panggil config
 if (!isset($conn)) {
+<<<<<<< HEAD
     require_once 'config.php';
 }
 
+=======
+    require_once '../config.php';
+}
+
+// Ambil data produk dari database MySQL
+// Kita urutkan berdasarkan yang terbaru agar produk yang baru diinput di kelola.php muncul di atas
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
 $query_products = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC LIMIT 8");
 ?>
 
@@ -15,7 +23,11 @@ $query_products = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC L
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+<<<<<<< HEAD
         <?php if ($query_products && mysqli_num_rows($query_products) > 0) : ?>
+=======
+        <?php if (mysqli_num_rows($query_products) > 0) : ?>
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
             <?php while ($product = mysqli_fetch_assoc($query_products)) : ?>
                 <div class="bg-white p-3 rounded-xl flex flex-col gap-2.5 shadow-sm hover:shadow-md transition-all duration-300 group">
                     
@@ -48,7 +60,13 @@ $query_products = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC L
                             </p>
                             
                             <div class="flex gap-2 items-center">
+<<<<<<< HEAD
                                 <p class="text-[#5543FF] text-[18px] md:text-[20px] font-black max-[580px]:text-[13px] max-[420px]:text-[12px]">★</p>
+=======
+                                <p class="text-[#5543FF] text-[18px] md:text-[20px] font-black max-[580px]:text-[13px] max-[420px]:text-[12px]">
+                                    ★
+                                </p>
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
                                 <p class="font-inter text-[11px] md:text-[13px] mt-1 font-medium max-[420px]:text-[10px] max-[380px]:hidden text-[#030075]">
                                     <?= number_format($product['rating'], 1) ?>/5.0
                                 </p>
@@ -59,6 +77,7 @@ $query_products = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC L
                             </p>
                         </div>
 
+<<<<<<< HEAD
                         <?php if ($product['status_stok'] == 'Ready') : ?>
                             <button onclick="addToCart(event, this, <?= $product['id'] ?>, 'assets/images/<?= $product['gambar'] ?>')" class="shrink-0 overflow-hidden bg-[#5543FF] rounded-[10px] p-2.5 md:p-3.5 group transition-all ease-in-out duration-200 hover:bg-[#FFCC00] cursor-pointer shadow-sm active:scale-90 block border-none outline-none">
                                 <img src="assets/images/IconBelanja.png" alt="Iconbelanja" class="w-6 md:w-8 max-[420px]:w-5 filter brightness-0 invert group-hover:invert-0 transition-all">
@@ -69,6 +88,13 @@ $query_products = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC L
                             </div>
                         <?php endif; ?>
 
+=======
+                        <div class="shrink-0 overflow-hidden bg-[#5543FF] rounded-[10px] p-2.5 md:p-3.5 group transition-all ease-in-out duration-200 hover:bg-[#FFCC00] cursor-pointer shadow-sm active:scale-90">
+                            <img src="assets/images/IconBelanja.png" 
+                                 alt="Iconbelanja" 
+                                 class="w-6 md:w-8 max-[420px]:w-5 filter brightness-0 invert group-hover:invert-0 transition-all">
+                        </div>
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
                     </div>
                 </div>
             <?php endwhile; ?>
@@ -80,6 +106,7 @@ $query_products = mysqli_query($conn, "SELECT * FROM products ORDER BY id DESC L
     </div>
 
     <div class="flex justify-center mt-6">
+<<<<<<< HEAD
         <div class="relative group">
             <a href="javascript:void(0)" class="flex bg-[#030075] px-6 py-2.5 rounded-2xl w-44 justify-center items-center transition-all ease-in-out duration-300 hover:scale-105 hover:bg-black shadow-[0_5px_15px_rgba(3,0,117,0.3)] max-[525px]:w-37 opacity-80 cursor-not-allowed">
                 <p class="font-poppins font-semibold text-white max-[525px]:text-[12px] tracking-wide">Lebih Banyak ‎ 》</p>
@@ -164,3 +191,10 @@ function updateBadge(badgeId, count) {
     }
 }
 </script>
+=======
+        <a href="katalog.php" class="flex bg-[#030075] px-6 py-2.5 rounded-2xl w-44 justify-center items-center cursor-pointer group transition-all ease-in-out duration-300 hover:scale-105 hover:bg-black shadow-[0_5px_15px_rgba(3,0,117,0.3)] max-[525px]:w-37">
+            <p class="font-poppins font-semibold text-white max-[525px]:text-[12px] tracking-wide">Lebih Banyak ‎ 》</p>
+        </a>
+    </div>
+</div>
+>>>>>>> 32ffd7f8c204e0f46471282ddea2f6122a0418d3
