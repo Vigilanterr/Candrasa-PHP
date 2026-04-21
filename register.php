@@ -12,13 +12,13 @@ if (isset($_POST['register'])) {
     $password        = $_POST['password'];
     $repeat_password = $_POST['repeat_password'];
 
-    // 1. Validasi: Apakah email sudah terdaftar?
+
     $check_email = mysqli_query($conn, "SELECT email FROM users WHERE email = '$email'");
     
     if (mysqli_num_rows($check_email) > 0) {
         $error_message = "Email sudah terdaftar! Gunakan email lain.";
     } 
-    // 2. Validasi: Apakah password dan repeat password cocok?
+
     else if ($password !== $repeat_password) {
         $error_message = "Konfirmasi password tidak cocok!";
     }

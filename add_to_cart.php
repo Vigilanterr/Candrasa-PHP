@@ -14,7 +14,6 @@ if (isset($_GET['id'])) {
     $product_id = (int)$_GET['id'];
     $user_id = $_SESSION['user_id'];
 
-    // 2. Masukkan ke keranjang
     $cek_keranjang = mysqli_query($conn, "SELECT * FROM keranjang WHERE user_id='$user_id' AND product_id='$product_id'");
     if (mysqli_num_rows($cek_keranjang) > 0) {
         mysqli_query($conn, "UPDATE keranjang SET qty = qty + 1 WHERE user_id='$user_id' AND product_id='$product_id'");
